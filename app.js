@@ -72,3 +72,13 @@ const menu = [
     desc: `Red bean paste dessert, serving with honey.`,
   },
 ];
+
+const btnContainer = document.querySelector(".btn-container");
+
+let buttons = ["All", "Korea", "Japan", "China"];
+buttons.forEach((item) => {
+  const button = document.createElement("button");
+  button.textContent = `${item}`;
+  button.setAttribute("class", "btn-item");
+  btnContainer.appendChild(button);
+});
