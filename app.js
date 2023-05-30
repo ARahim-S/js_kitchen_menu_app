@@ -86,11 +86,42 @@ buttons.forEach((item) => {
 });
 
 let allBtn = document.getElementById("all");
-allBtn.addEventListener("click", getAllMenu);
+let koreaBtn = document.getElementById("korea");
+let japanBtn = document.getElementById("japan");
+let chinaBtn = document.getElementById("china");
 
-function getAllMenu(e) {
-  console.log(e.target.id);
-  menu.forEach((item) => {
+let filteredKoreaMenu = menu.filter((item) => {
+  return item["category"] === "Korea";
+});
+
+let filteredJapanMenu = menu.filter((item) => {
+  return item["category"] === "Japan";
+});
+
+let filteredChinaMenu = menu.filter((item) => {
+  return item["category"] === "China";
+});
+
+allBtn.addEventListener("click", (e) => {
+  getAllMenu(e, menu);
+});
+
+koreaBtn.addEventListener("click", (e) => {
+  getAllMenu(e, filteredKoreaMenu);
+});
+
+japanBtn.addEventListener("click", (e) => {
+  getAllMenu(e, filteredJapanMenu);
+});
+
+chinaBtn.addEventListener("click", (e) => {
+  getAllMenu(e, filteredChinaMenu);
+});
+
+function getAllMenu(e, menuList) {
+  console.log(menuList);
+  sectionCenter.textContent = null;
+  menuList.forEach((item) => {
     const divMain = document.createElement("div");
     divMain.setAttribute("class", "menu-items");
     divMain.classList.add("col-lg-6");
@@ -127,4 +158,6 @@ function getAllMenu(e) {
   });
 }
 
-window.addEventListener("load", getAllMenu);
+window.addEventListener("load", (e) => {
+  getAllMenu(e, menu);
+});
