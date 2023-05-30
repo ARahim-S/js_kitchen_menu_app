@@ -74,11 +74,57 @@ const menu = [
 ];
 
 const btnContainer = document.querySelector(".btn-container");
+const sectionCenter = document.querySelector(".section-center");
 
 let buttons = ["All", "Korea", "Japan", "China"];
 buttons.forEach((item) => {
   const button = document.createElement("button");
   button.textContent = `${item}`;
   button.setAttribute("class", "btn-item");
+  button.setAttribute("id", `${item.toLowerCase()}`);
   btnContainer.appendChild(button);
 });
+
+let allBtn = document.getElementById("all");
+allBtn.addEventListener("click", getAllMenu);
+
+function getAllMenu(e) {
+  console.log(e.target.id);
+  menu.forEach((item) => {
+    const divMain = document.createElement("div");
+    divMain.setAttribute("class", "menu-items");
+    divMain.classList.add("col-lg-6");
+    divMain.classList.add("col-sm-12");
+    sectionCenter.appendChild(divMain);
+    //
+    const imgMenu = document.createElement("img");
+    imgMenu.setAttribute("class", "photo");
+    imgMenu.src = `${item.img}`;
+    divMain.appendChild(imgMenu);
+    //
+    const divMenuInfo = document.createElement("div");
+    divMenuInfo.setAttribute("class", "menu-info");
+    divMain.appendChild(divMenuInfo);
+    //
+    const divContent = document.createElement("div");
+    divContent.classList.add("menu-title");
+    divMenuInfo.appendChild(divContent);
+    //
+    const h4 = document.createElement("h4");
+    h4.textContent = `${item.title}`;
+    divContent.appendChild(h4);
+    //
+    const h4Second = document.createElement("h4");
+    h4Second.classList.add("price");
+    h4Second.textContent = `${item.price}`;
+    divContent.appendChild(h4Second);
+    //
+    const divMenuText = document.createElement("div");
+    divMenuText.setAttribute("class", "menu-text");
+    divMenuText.textContent = `${item.desc}`;
+    divMenuInfo.appendChild(divMenuText);
+    //
+  });
+}
+
+window.addEventListener("load", getAllMenu);
